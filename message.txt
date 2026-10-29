@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Pass - Securly Pass</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #eee;
+            font-family: sans-serif;
+            margin: 20px;
+            position: relative;
+        }
+
+        /* This container keeps the iframe strictly bound to 100x75 */
+        .iframe-container {
+            width: 100px;
+            height: 40px;
+            border: 2px solid #333;
+            overflow: hidden; 
+            position: relative;
+            background: #000;
+        }
+
+        iframe {
+            width: 1600px;
+            height: 1000px;
+            border: none;
+            
+            /* Reduced scale from 0.3 down to 0.0625 to fit the 100px container */
+            transform: scale(0.0625);
+            
+            transform-origin: 0 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1; /* Sits at the bottom */
+        }
+
+        /* The Glitch Overlay Layer */
+        .glitch-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2; /* Sits directly on top of the iframe */
+            pointer-events: none; 
+            mix-blend-mode: color-dodge; 
+            opacity: 0.3; 
+            
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%, 
+                rgba(0, 0, 0, 0.25) 50%
+            ), linear-gradient(
+                90deg, 
+                rgba(255, 0, 0, 0.06), 
+                rgba(0, 255, 0, 0.02), 
+                rgba(0, 0, 255, 0.06)
+            );
+            background-size: 100% 4px, 6px 100%;
+            animation: glitch-flicker 0.15s infinite, glitch-bars 3s infinite linear;
+        }
+
+        /* The Full-Page Cloudy Mist Overlay */
+        .cloud-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999; /* Sits above EVERYTHING on the page */
+            pointer-events: none; /* Crucial so you can still click buttons underneath */
+            
+            /* High opacity (0.88) ensures the page is almost entirely hidden */
+            opacity: 0.88; 
+            
+            /* Generates a soft, layered cloud texture using overlapping gradients */
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(240, 240, 245, 0.9), transparent 60%),
+                radial-gradient(circle at 75% 20%, rgba(225, 230, 240, 0.85), transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(235, 235, 240, 0.9), transparent 70%),
+                radial-gradient(circle at 80% 70%, rgba(215, 220, 230, 0.8), transparent 60%),
+                #eef2f7; /* Base misty white color */
+                
+            background-size: 200% 200%;
+            animation: drift-clouds 20s ease infinite alternate;
+            filter: blur(8px); /* Blurs the edges to look like real fog */
+        }
+
+        /* Animations */
+        @keyframes glitch-flicker {
+            0% { opacity: 0.25; }
+            50% { opacity: 0.35; }
+            100% { opacity: 0.25; }
+        }
+
+        @keyframes glitch-bars {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 150px; }
+        }
+
+        /* Slowly moves the clouds around so the mist feels alive */
+        @keyframes drift-clouds {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 50% 100%; }
+            100% { background-position: 100% 50%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- This cloud layer blankets the entire screen -->
+    <div class="cloud-overlay"></div>
+
+    <h2>WHEN WEHN WEUHANUSNHBUDBHAUSHBDUYASD</h2>
+    
+    <div class="iframe-container">
+        <!-- The live webpage inside -->
+        <iframe src="https://vibehubfun.site" title="Embedded Webpage"></iframe>
+        
+        <!-- The animated glitch layer inside the frame -->
+        <div class="glitch-overlay"></div>
+    </div>
+
+</body>
+</html>
